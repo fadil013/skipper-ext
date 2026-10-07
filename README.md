@@ -2,6 +2,10 @@
 
 Skipper detects and skips sponsored segments on YouTube using crowd data and caption-based AI classification.
 
+![Skipper overview](docs/overview.png)
+
+*Simplified overview. In the actual pipeline SponsorBlock crowd data is checked first, and the AI step runs only when it has nothing.*
+
 ## Status
 
 **Version 0.2.0, early release.**
