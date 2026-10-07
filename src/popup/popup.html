@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skipper</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <svg class="logo" viewBox="0 0 24 24" aria-hidden="true">
+      <rect width="24" height="24" rx="5" fill="#EF4444"/>
+      <polygon points="4.8,6.5 4.8,17.5 12,12" fill="#fff"/>
+      <polygon points="11.5,6.5 11.5,17.5 18.7,12" fill="#fff"/>
+    </svg>
+    <div class="title">
+      <h1>Skipper</h1>
+      <p>Sponsor detection for YouTube</p>
+    </div>
+    <span class="pill" id="pill"><i></i><span id="pill-text">Active</span></span>
+  </header>
+
+  <main>
+    <section id="view-main">
+      <h2>Current video</h2>
+      <dl class="rows">
+        <div><dt>Status</dt><dd id="v-status">&ndash;</dd></div>
+        <div><dt>Captions</dt><dd id="v-captions">&ndash;</dd></div>
+        <div><dt>Segments</dt><dd id="v-segments">&ndash;</dd></div>
+        <div><dt>Sponsors</dt><dd id="v-sponsors">&ndash;</dd></div>
+      </dl>
+      <p class="note" id="note" hidden></p>
+
+      <label class="switch-row" for="autoSkip">
+        <span>Auto skip</span>
+        <input type="checkbox" id="autoSkip" class="switch">
+      </label>
+
+      <div class="slider-row">
+        <div class="slider-head"><span>Sponsor confidence</span><output id="thresholdOut"></output></div>
+        <input type="range" id="sponsorSkipThreshold" min="0.5" max="0.99" step="0.01">
+      </div>
+
+      <div class="timeline-wrap">
+        <div class="timeline" id="timeline"></div>
+        <div class="timeline-labels"><span>0:00</span><span id="t-end">0:00</span></div>
+      </div>
+    </section>
+
+    <section id="view-settings" hidden>
+      <h2>Settings</h2>
+      <label class="switch-row" for="showTimeline">
+        <span>Show timeline on seek bar</span>
+        <input type="checkbox" id="showTimeline" class="switch">
+      </label>
+
+      <div class="field">
+        <label for="apiKey">API key</label>
+        <input type="password" id="apiKey" autocomplete="off" spellcheck="false" placeholder="sk-ant-...">
+      </div>
+      <div class="field">
+        <label for="endpoint">API endpoint</label>
+        <input type="text" id="endpoint" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="actions">
+        <button type="button" id="saveApi" class="primary">Save</button>
+        <button type="button" id="removeKey" class="link" hidden>Remove key</button>
+        <span class="saved" id="saved" role="status"></span>
+      </div>
+
+      <details>
+        <summary>Advanced</summary>
+        <div class="field">
+          <label for="uncertainThreshold">Uncertain threshold <output id="uncertainOut"></output></label>
+          <input type="range" id="uncertainThreshold" min="0.3" max="0.95" step="0.01">
+        </div>
+        <div class="field">
+          <label for="targetSegmentSeconds">Target segment length <output id="targetOut"></output></label>
+          <input type="range" id="targetSegmentSeconds" min="15" max="60" step="1">
+        </div>
+        <div class="field">
+          <label for="minimumSkipSeconds">Minimum skip <output id="minOut"></output></label>
+          <input type="range" id="minimumSkipSeconds" min="1" max="30" step="1">
+        </div>
+        <div class="field">
+          <label for="mergeGapSeconds">Merge gap <output id="gapOut"></output></label>
+          <input type="range" id="mergeGapSeconds" min="0" max="10" step="1">
+        </div>
+        <label class="switch-row" for="debug">
+          <span>Debug logging</span>
+          <input type="checkbox" id="debug" class="switch">
+        </label>
+      </details>
+    </section>
+
+    <section id="view-diagnostics" hidden>
+      <h2>Diagnostics</h2>
+      <dl class="rows" id="diag"></dl>
+    </section>
+  </main>
+
+  <footer>
+    <button type="button" class="link" id="nav-settings">Settings</button>
+    <button type="button" class="link" id="nav-diagnostics">Diagnostics</button>
+  </footer>
+
+  <script src="../shared/config.js"></script>
+  <script src="../shared/validation.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

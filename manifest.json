@@ -1,18 +1,46 @@
 {
   "manifest_version": 3,
   "name": "Skipper",
-  "version": "0.1.0",
-  "description": "Skips YouTube sponsor segments, even on videos nobody has labeled yet.",
+  "version": "0.2.0",
+  "description": "Sponsor detection for YouTube. Skips paid sponsor segments using crowd data and caption-based classification.",
+  "minimum_chrome_version": "116",
+  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
   "permissions": ["storage"],
   "host_permissions": [
-    "https://www.youtube.com/*",
     "https://sponsor.ajay.app/*",
     "https://api.anthropic.com/*"
   ],
-  "background": { "service_worker": "src/background.js", "type": "module" },
-  "action": { "default_popup": "src/popup.html" },
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": { "service_worker": "src/background/background.js" },
+  "action": {
+    "default_title": "Skipper",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png" }
+  },
   "content_scripts": [
-    { "matches": ["https://www.youtube.com/*"], "js": ["src/hook.js"], "world": "MAIN", "run_at": "document_start" },
-    { "matches": ["https://www.youtube.com/*"], "js": ["src/content.js"], "css": ["src/content.css"], "run_at": "document_idle" }
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["src/page/caption-hook.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": [
+        "src/shared/config.js",
+        "src/shared/validation.js",
+        "src/content/captions.js",
+        "src/content/segmentation.js",
+        "src/content/timeline.js",
+        "src/content/skipper.js",
+        "src/content/content.js"
+      ],
+      "css": ["src/content/content.css"],
+      "run_at": "document_idle"
+    }
   ]
 }

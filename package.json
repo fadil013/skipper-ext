@@ -1,0 +1,10 @@
+{
+  "name": "skipper",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Sponsor detection for YouTube",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test"
+  }
+}
