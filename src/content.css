@@ -1,0 +1,6 @@
+.skipper-slice { position: absolute; bottom: 0; height: 100%; pointer-events: none; z-index: 30; }
+.skipper-toast {
+  position: absolute; left: 16px; bottom: 70px; z-index: 60; padding: 8px 12px;
+  background: rgba(20, 20, 20, 0.92); color: #fff; font: 13px/1.2 system-ui, sans-serif; border-radius: 8px;
+}
+.skipper-toast button { margin-left: 8px; background: #fff; color: #111; border: 0; border-radius: 4px; padding: 2px 8px; cursor: pointer; }
