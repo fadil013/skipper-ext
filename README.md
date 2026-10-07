@@ -2,6 +2,24 @@
 
 Skipper detects and skips sponsored segments on YouTube using crowd data and caption-based AI classification.
 
+## Status
+
+**Version 0.2.0, early release.**
+
+Done:
+- SponsorBlock lookup with AI fallback on captions
+- Sponsor-only auto skip at 84% confidence, with uncertain markers and Undo
+- Validated model output, hardened page/content messaging, local result cache
+- Popup with settings and diagnostics
+- 53 automated tests (`npm test`), all passing
+
+Not yet verified:
+- **Not tested in a real Chrome session yet.** Unit tests and static checks pass, but the extension has not been loaded and used on live YouTube videos.
+- Caption capture depends on YouTube internals and may need fixes.
+- AI classification quality has not been measured.
+
+Bug reports are welcome.
+
 ## How it works
 
 ```
